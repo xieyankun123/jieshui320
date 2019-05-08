@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+
+<mapper namespace="com.xyk.dao.gyDao">
+    <!--<select id="selfac" resultType="com.xyk.model.factory">-->
+        <!--select id,factory from factory where id=#{factory};-->
+    <!--</select>-->
+    <!--<resultMap type="com.xyk.model.gyModel" id="gqmodelMapper">-->
+        <!--<id column="id" property="id"/>-->
+        <!--<result column="apartment_id" property="apartment_id"/>-->
+        <!--<result column="useable" property="useable"/>-->
+        <!--<result column="location" property="location"/>-->
+        <!--<result column="owner" property="owner"/>-->
+        <!--<result column="longitude" property="longitude"/>-->
+        <!--<result column="latitude" property="latitude"/>-->
+        <!--<result column="lasttime" property="lasttime"/>-->
+        <!--<result column="intervall" property="intervall"/>-->
+        <!--<result column="wendu" property="wendu"/>-->
+        <!--<result column="shidu" property="shidu"/>-->
+        <!--<result column="dianliang" property="dianliang"/>-->
+        <!--<result column="beizhu" property="beizhu"/>-->
+        <!--<result column="meterxy" property="meterxy"/>-->
+        <!--<result column="numxy" property="numxy"/>-->
+        <!--<association property="factory"-->
+                     <!--javaType="com.xyk.model.factory"-->
+                     <!--select="selfac"-->
+                     <!--column="factory"-->
+        <!--/>-->
+    <!--</resultMap>-->
+    <!--根据仪器的id查找-->
+    <select id="selbyid" parameterType="java.lang.String" resultType="com.xyk.model.gyModel">
+      SELECT * from apartment where apartment_id=#{apartment_id}
+    </select>
+    <!--列表-->
+    <select id="list" resultType="com.xyk.model.gyModel">
+        select id,factory,apartment_id,useable,location,owner,longitude,latitude,lasttime,intervall,wendu,shidu,dianliang,beizhu,meterxy,numxy from apartment
+    </select>
+    <insert id="add" parameterType="com.xyk.model.gyModel">
+        insert into apartment(id,factory,apartment_id,useable,location,owner,longitude,latitude,lasttime,intervall,wendu,shidu,dianliang,beizhu,meterxy,numxy) values(#{id},#{factory},#{apartment_id},#{useable},#{location},#{owner},#{longitude},#{latitude},#{lasttime},#{intervall},#{wendu},#{shidu},#{dianliang},#{beizhu},#{meterxy},#{numxy})
+    </insert>
+    <update id="update" parameterType="com.xyk.model.gyModel">
+        <if test="factory!=null and factory!=''">
+            update apartment set factory=#{factory} where id=#{id};
+        </if>
+        <if test="apartment_id!=null and apartment_id!=''">
+            update apartment set apartment_id=#{apartment_id} where id=#{id};
+        </if>
+        <if test="useable!=null and useable!=''">
+            update apartment set useable=#{useable} where id=#{id};
+        </if>
+        <if test="location!=null and location!=''">
+            update apartment set location=#{location} where id=#{id};
+        </if>
+        <if test="owner!=null and owner!=''">
+            update apartment set owner=#{owner} where id=#{id};
+        </if>
+        <if test="longitude!=null and longitude!=''">
+            update apartment set longitude=#{longitude} where id=#{id};
+        </if>
+        <if test="latitude!=null and latitude!=''">
+            update apartment set latitude=#{latitude} where id=#{id};
+        </if>
+        <if test="intervall!=null and intervall!=''">
+            update apartment set intervall=#{intervall} where id=#{id};
+        </if>
+        <if test="wendu!=null and wendu!=''">
+            update apartment set wendu=#{wendu} where id=#{id};
+        </if>
+        <if test="shidu!=null and shidu!=''">
+        update apartment set shidu=#{shidu} where id=#{id};
+        </if>
+        <if test="dianliang!=null and dianliang!=''">
+        update apartment set dianliang=#{dianliang} where id=#{id};
+        </if>
+        <if test="beizhu!=null and beizhu!=''">
+        update apartment set beizhu=#{beizhu} where id=#{id};
+        </if>
+        <if test="meterxy!=null and meterxy!=''">
+        update apartment set meterxy=#{meterxy} where id=#{id};
+        </if>
+        <if test="numxy!=null and numxy!=''">
+        update apartment set numxy=#{numxy} where id=#{id};
+        </if>
+    </update>
+    <update id="updateName" parameterType="com.xyk.model.gyModel">
+        update apartment set owner=#{owner} where id=#{id}
+    </update>
+    <update id="updateTime" parameterType="com.xyk.model.gyModel">
+        update apartment set lasttime=#{lasttime} where apartment_id=#{apartment_id}
+    </update>
+    <update id="updateLL" parameterType="com.xyk.model.gyModel">
+        update apartment set longitude=#{longitude},latitude=#{latitude} where id=#{id}
+    </update>
+</mapper>

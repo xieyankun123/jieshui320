@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+
+<mapper namespace="com.xyk.dao.meterDao">
+    <select id="list" resultType="com.xyk.model.waterrModel">
+      SELECT * from water
+    </select>
+    <update id="update" >
+        update water set value=#{value},jiaozhun=#{jiaozhun},jiaozhuntime=#{jiaozhuntime} where id=#{id}
+    </update>
+    <update id="updateZvalue" >
+        update water set zzvalue=#{zzvalue} where id=#{id}
+    </update>
+    <select id="s" parameterType="java.lang.String" resultType="com.xyk.model.waterrModel">
+      SELECT * from water where WID_out=#{WID_out} and value is not NULL
+    </select>
+    <!--插入信息-->
+    <insert id="add" parameterType="com.xyk.model.waterrModel"  useGeneratedKeys="true" keyProperty="id">
+        insert into water(WID_out,user_id,time,value,picture,factory,zzvalue,type) values
+        (#{WID_out},#{user_id},#{time},#{value},#{picture},#{factory},#{zzvalue},#{type})
+    </insert>
+</mapper>
